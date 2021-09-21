@@ -1,10 +1,36 @@
 .level-screen {
-  justify-content: center;
   align-items: center;
+  justify-items: center;
+  font-family: "Open Sans", sans-serif;
 }
-.level-screen {
+.level-screen__heading {
+  font-family: "Calligraffitti", cursive;
+  font-size: 50px;
+  font-weight: 1000;
+}
+.level-screen__text {
+  font-size: 25px;
+}
+.level-screen__levels {
+  list-style: none;
+  font-size: 18px;
+}
+.level-screen__naruto {
+  height: 250px;
+}
+
+main .level-screen {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto auto auto;
   min-height: 100vh;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 20px;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
