@@ -1,0 +1,21 @@
+.level-screen {
+    align-items: center;
+    justify-items: center;
+    font-family: 'Open Sans', sans-serif;
+    &__heading {
+        font-family: 'Calligraffitti', cursive;
+        font-size: 50px;
+        font-weight: 1000;
+    }
+    &__text {
+        font-size: 25px;
+    }
+
+    &__levels {
+        list-style: none;
+        font-size: 18px;
+    }
+    &__naruto {
+        height: 250px;
+    }
+}
