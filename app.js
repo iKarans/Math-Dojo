@@ -1,20 +1,24 @@
 const time = document.querySelector(".game-screen__time");
 const operation = document.querySelector(".game-screen__operation");
 const solutionInput = document.querySelector(".game-screen__input");
-const lives = document.querySelector(".game-screen__lives__live")
-const score = document.querySelector(".game-screen__score")
+const score = document.querySelector(".game-screen__score");
+const overlay = document.querySelector(".overlay")
+const lives = document.querySelectorAll(".game-screen__lives__live");
 
 
 class Game {
-    constructor(time, operation, solutionInput, score) {
+    constructor(time, operation, solutionInput, score, lives) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
         this.score = score;
+        this.lives = lives;
         this.currentOperator = "+";
         this.firstNum = 9;
         this.secondNum = 10;
-        this.scoreTracker = 0
+        this.scoreTracker = 0;
+        this.livesTracker = 0
+        
     }
     timer () {
         const now = Date.now();
@@ -46,11 +50,15 @@ class Game {
     generateOperation () {
         this.firstNum = this.generateNumber();
         this.secondNum = this.generateNumber();
-        this.operation.innerText = `${this.firstNum} + ${this.secondNum}`;
+        this.operation.innerText = `${this.firstNum} + ${this.secondNum} =`;
     }
     checkInput () {
         if (this.solutionInput.value != this.firstNum + this.secondNum) {
-            alert("donkey");
+            this.lives[this.livesTracker].innerText = "X";
+            this.livesTracker += 1;
+            if(this.livesTracker == 3) {
+                overlay.classList.add("isvisible");
+            }
         } else {
             this.scoreTracker += 1;
             this.increaseScore();
@@ -72,7 +80,7 @@ class Game {
     }
 }
 
-const dojo = new Game(time, operation, solutionInput, score);
+const dojo = new Game(time, operation, solutionInput, score, lives);
 // dojo.timer();
 // dojo.generateOperation();
 // dojo.checkInput();
