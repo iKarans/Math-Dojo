@@ -1,11 +1,23 @@
 main {
     .level-screen {
         display: grid;
+        width: 90%;
+        margin: auto;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
         min-height: 100vh;
         justify-content: center;
         align-content: center;
         grid-gap: 20px;
+    }
+    .game-screen {
+        display: grid;
+        width: 90%;
+        margin: auto;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        min-height: 100vh;
+        justify-content: center;
+        align-content: center;
     }
 }
