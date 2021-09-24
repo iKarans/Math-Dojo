@@ -4,9 +4,11 @@ const solutionInput = document.querySelector(".game-screen__input");
 const score = document.querySelector(".game-screen__score");
 const lives = document.querySelectorAll(".game-screen__lives__live");
 const overlay = document.querySelector(".overlay");
+const levelScreen = document.querySelector(".level-screen");
 const gameScreen = document.querySelector(".game-screen");
 const levelsBtn = document.querySelectorAll(".level-screen__options__level");
 const timesBtn = document.querySelectorAll(".level-screen__options__time");
+const startBtn = document.querySelector(".level-screen__start-btn");
 
 let currentLevel;
 let currentTime;
@@ -23,6 +25,11 @@ timesBtn.forEach((btn) => {
         currentTime = btn.innerText;
         console.log(currentTime);
     })
+})
+
+startBtn.addEventListener("click", () => {
+    levelScreen.style.display = "none";
+    dojo.startGame();
 })
 class Game {
     constructor(time, operation, solutionInput, score, lives) {
