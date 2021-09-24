@@ -5,9 +5,25 @@ const score = document.querySelector(".game-screen__score");
 const lives = document.querySelectorAll(".game-screen__lives__live");
 const overlay = document.querySelector(".overlay");
 const gameScreen = document.querySelector(".game-screen");
+const levelsBtn = document.querySelectorAll(".level-screen__options__level");
+const timesBtn = document.querySelectorAll(".level-screen__options__time");
 
+let currentLevel;
+let currentTime;
 
+levelsBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        currentLevel = btn.innerText;
+        console.log(currentLevel);
+    })
+})
 
+timesBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        currentTime = btn.innerText;
+        console.log(currentTime);
+    })
+})
 class Game {
     constructor(time, operation, solutionInput, score, lives) {
         this.time = time;

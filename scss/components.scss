@@ -9,6 +9,7 @@
         font-weight: 1000;
     }
     &__options {
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: repeat(8 ,auto);

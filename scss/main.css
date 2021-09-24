@@ -10,6 +10,7 @@
   font-weight: 1000;
 }
 .level-screen__options {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(8, auto);
