@@ -2,8 +2,7 @@
     align-items: center;
     justify-items: center;
     font-family: 'Open Sans', sans-serif;
-    background-color: #0b0b0b;
-    color: #f2a30b;
+    color: red;
     &__heading {
         font-family: 'Calligraffitti', cursive;
         font-size: 65px;
@@ -18,7 +17,7 @@
         font-size: 18px;
     }
     &__naruto {
-        height: 250px;
+       font-size: 250px;
     }
 }
 
