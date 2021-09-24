@@ -31,6 +31,7 @@
     }
     &__operation {
         font-size: 55px;
+        width: 210px;
     }
     &__input {
         width: 70px;
@@ -68,4 +69,28 @@
             }
         }
     }
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .33s ease-out;
+    transform: scale(1.2)
+}
+.isvisible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.blur {
+    filter: blur(4px);
 }
