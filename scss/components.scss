@@ -2,22 +2,34 @@
     align-items: center;
     justify-items: center;
     font-family: 'Open Sans', sans-serif;
-    color: red;
+    color: black;
     &__heading {
         font-family: 'Calligraffitti', cursive;
         font-size: 65px;
         font-weight: 1000;
     }
-    &__text {
-        font-size: 25px;
-    }
-
-    &__levels {
-        list-style: none;
-        font-size: 18px;
+    &__options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(8 ,auto);
+        justify-content: center;
+        align-content: center;
+        &__timestext {
+            grid-column: 2/ 3;
+            grid-row: 1 / 2;
+        }
+        &__einstein {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+        }
+        &__me {
+            grid-column: 1 / 2;
+            grid-row: 4 / 5;
+        }
     }
     &__naruto {
        font-size: 250px;
+       color: red;
     }
 }
 

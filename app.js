@@ -85,4 +85,4 @@ const dojo = new Game(time, operation, solutionInput, score, lives);
 // dojo.timer();
 // dojo.generateOperation();
 // dojo.checkInput();
-dojo.startGame();
+// dojo.startGame();
