@@ -2,8 +2,10 @@ const time = document.querySelector(".game-screen__time");
 const operation = document.querySelector(".game-screen__operation");
 const solutionInput = document.querySelector(".game-screen__input");
 const score = document.querySelector(".game-screen__score");
-const overlay = document.querySelector(".overlay")
 const lives = document.querySelectorAll(".game-screen__lives__live");
+const overlay = document.querySelector(".overlay");
+const gameScreen = document.querySelector(".game-screen");
+
 
 
 class Game {
@@ -22,13 +24,15 @@ class Game {
     }
     timer () {
         const now = Date.now();
-        const future = now + 1000 * 30;
+        const future = now + 1000 * 120;
         this.displayTime((future - now) / 1000);
 
         const countdown = setInterval(() => {
             const secondsLeft = Math.round((future - Date.now()) / 1000);
-            if(secondsLeft < 0) {
+            if(secondsLeft < 0 || this.livesTracker == 3) {
                 clearInterval(countdown);
+                overlay.classList.add("isvisible");
+                gameScreen.classList.add("blur");
                 return;
             }
             this.displayTime(secondsLeft)
@@ -56,9 +60,6 @@ class Game {
         if (this.solutionInput.value != this.firstNum + this.secondNum) {
             this.lives[this.livesTracker].innerText = "X";
             this.livesTracker += 1;
-            if(this.livesTracker == 3) {
-                overlay.classList.add("isvisible");
-            }
         } else {
             this.scoreTracker += 1;
             this.increaseScore();
