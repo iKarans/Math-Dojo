@@ -32,12 +32,14 @@ startBtn.addEventListener("click", () => {
     dojo.startGame();
 })
 class Game {
-    constructor(time, operation, solutionInput, score, lives) {
+    constructor(time, operation, solutionInput, score, lives, currentLevel, currentTime) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
         this.score = score;
         this.lives = lives;
+        this.currentLevel = currentLevel;
+        this.currentTime = currentTime;
         this.currentOperator = "+";
         this.firstNum = 9;
         this.secondNum = 10;
@@ -47,7 +49,7 @@ class Game {
     }
     timer () {
         const now = Date.now();
-        const future = now + 1000 * 120;
+        const future = now + 1000 * parseInt(currentTime) * 60;
         this.displayTime((future - now) / 1000);
 
         const countdown = setInterval(() => {
