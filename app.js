@@ -10,6 +10,7 @@ const levelsBtn = document.querySelectorAll(".level-screen__options__level");
 const timesBtn = document.querySelectorAll(".level-screen__options__time");
 const startBtn = document.querySelector(".level-screen__start-btn");
 const progressBar = document.querySelector(".game-screen__progress__inner");
+const resetBtn = document.querySelector(".overlay__iner__resetbtn");
 
 let currentLevel;
 let currentTime;
@@ -28,8 +29,20 @@ timesBtn.forEach((btn) => {
 
 startBtn.addEventListener("click", () => {
     levelScreen.style.display = "none";
+    gameScreen.style.display = "grid";
     const dojo = new Game(time, operation, solutionInput, score, lives, currentLevel, currentTime);
     dojo.startGame();
+})
+
+resetBtn.addEventListener("click", () => {
+    levelScreen.style.display = "grid";
+    gameScreen.style.display = "none";
+    overlay.classList.remove("isvisible");
+    gameScreen.classList.remove("blur");
+    lives.forEach((live) => {
+        live.innerText = ""
+    });
+    progressBar.style.transform = `scaleX(0)`
 })
 class Game {
     constructor(time, operation, solutionInput, score, lives, currentLevel, currentTime) {
@@ -150,9 +163,3 @@ class Game {
 
     }
 }
-
-
-// dojo.timer();
-// dojo.generateOperation();
-// dojo.checkInput();
-// dojo.startGame();

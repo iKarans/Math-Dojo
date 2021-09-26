@@ -130,7 +130,7 @@ main .level-screen {
   grid-gap: 20px;
 }
 main .game-screen {
-  display: grid;
+  display: none;
   width: 90%;
   margin: auto;
   grid-template-columns: auto 1fr;
