@@ -16,19 +16,18 @@ let currentTime;
 levelsBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
         currentLevel = btn.innerText;
-        console.log(currentLevel);
     })
 })
 
 timesBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
         currentTime = btn.innerText;
-        console.log(currentTime);
     })
 })
 
 startBtn.addEventListener("click", () => {
     levelScreen.style.display = "none";
+    const dojo = new Game(time, operation, solutionInput, score, lives, currentLevel, currentTime);
     dojo.startGame();
 })
 class Game {
@@ -40,9 +39,9 @@ class Game {
         this.lives = lives;
         this.currentLevel = currentLevel;
         this.currentTime = currentTime;
-        this.currentOperator = "+";
-        this.firstNum = 9;
-        this.secondNum = 10;
+        this.currentOperator;
+        this.firstNum;
+        this.secondNum;
         this.scoreTracker = 0;
         this.livesTracker = 0
         
@@ -74,15 +73,50 @@ class Game {
         
     }
     generateNumber () {
-        return Math.ceil(Math.random() * 10);
+        if (this.currentLevel == "Donkey") {
+            return Math.ceil(Math.random() * 10);
+        } else if (this.currentLevel == "Einstein") {
+            return Math.ceil(Math.random() * 100);
+        } else {
+            return Math.ceil(Math.random() * 1000);
+        }
+    }
+    generateOperator () {
+        const operatorArray= ["+", "-", "*"]
+        if(this.currentLevel == "Donkey") {
+            return operatorArray[Math.floor(Math.random() * 2)];
+        } else if (this.currentLevel == "Einstein") {
+            if (this.firstNum > 13 && this.secondNum > 13) {
+                return operatorArray[Math.floor(Math.random() * 2)];
+            }
+            else {
+                return "*";
+            }
+        } else {
+            if (this.firstNum > 100 && this.secondNum > 100) {
+                return operatorArray[Math.floor(Math.random() * 2)];
+            }
+            else {
+                return "*";
+            }
+        }
     }
     generateOperation () {
         this.firstNum = this.generateNumber();
         this.secondNum = this.generateNumber();
-        this.operation.innerText = `${this.firstNum} + ${this.secondNum} =`;
+        this.currentOperator = this.generateOperator()
+        this.operation.innerText = `${this.firstNum} ${this.currentOperator} ${this.secondNum} =`;
     }
     checkInput () {
-        if (this.solutionInput.value != this.firstNum + this.secondNum) {
+        let expected;
+        if (this.currentOperator == "+") {
+            expected = this.firstNum + this.secondNum
+        } else if (this.currentOperator == "-") {
+            expected = this.firstNum - this.secondNum
+        } else {
+            expected = this.firstNum * this.secondNum
+        }
+        if (this.solutionInput.value != expected) {
             this.lives[this.livesTracker].innerText = "X";
             this.livesTracker += 1;
         } else {
@@ -96,6 +130,9 @@ class Game {
         this.score.innerText = this.scoreTracker
     }
     startGame() {
+        console.log(this.currentTime);
+        console.log(this.currentLevel);
+        this.generateOperation();
         this.timer();
         solutionInput.addEventListener("keydown", (e) => {
             if (e.code == "Enter") {
@@ -106,7 +143,7 @@ class Game {
     }
 }
 
-const dojo = new Game(time, operation, solutionInput, score, lives);
+
 // dojo.timer();
 // dojo.generateOperation();
 // dojo.checkInput();
