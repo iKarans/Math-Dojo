@@ -75,10 +75,19 @@
             width: 100%;
             &__box {
                 height: 40px;
-                border-right: 1px solid;
+                border-right: 1px solid #c7c7c7;
                 flex: 1;
-                background-color: red;
             }
+        }
+        &__inner {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #00CC00;
+            transform: scaleX(0);
+            transform-origin: center left;
+            transition: transform .4s ease-out;
         }
     }
 }

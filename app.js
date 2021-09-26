@@ -9,6 +9,7 @@ const gameScreen = document.querySelector(".game-screen");
 const levelsBtn = document.querySelectorAll(".level-screen__options__level");
 const timesBtn = document.querySelectorAll(".level-screen__options__time");
 const startBtn = document.querySelector(".level-screen__start-btn");
+const progressBar = document.querySelector(".game-screen__progress__inner");
 
 let currentLevel;
 let currentTime;
@@ -107,6 +108,15 @@ class Game {
         this.currentOperator = this.generateOperator()
         this.operation.innerText = `${this.firstNum} ${this.currentOperator} ${this.secondNum} =`;
     }
+    increaseScore () {
+        this.score.innerText = this.scoreTracker
+    }
+    increaseProgressBar () {
+        if(this.scoreTracker > 10) {
+            return;
+        }
+        progressBar.style.transform = `scaleX(${this.scoreTracker / 10})`
+    }
     checkInput () {
         let expected;
         if (this.currentOperator == "+") {
@@ -122,12 +132,10 @@ class Game {
         } else {
             this.scoreTracker += 1;
             this.increaseScore();
+            this.increaseProgressBar();
             this.generateOperation();
         }
         this.solutionInput.value = null;
-    }
-    increaseScore () {
-        this.score.innerText = this.scoreTracker
     }
     startGame() {
         console.log(this.currentTime);
