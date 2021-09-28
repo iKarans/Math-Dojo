@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Dojo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="scss/main.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Dojo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scss/main.css">
 </head>
 <body>
     <main>
         <section class="level-screen">
             <h1 class="level-screen__heading">Math Dojo</h1>
             <div class="level-screen__options">
-                <p class="level-screen__options__levelstext">Skill Level:</p>
+                <p class="level-screen__options__levelstext">Skill Level</p>
                 <button class="level-screen__options__donkey level-screen__options__level">Donkey</button>
                 <button class="level-screen__options__einstein level-screen__options__level">Einstein</button>
                 <button class="level-screen__options__me level-screen__options__level">Me</button>
-                <p class="level-screen__options__timestext">Time:</p>
+                <p class="level-screen__options__timestext">Time</p>
                 <button class="level-screen__options__1 level-screen__options__time">1:00</button>
                 <button class="level-screen__options_2 level-screen__options__time">2:00</button>
                 <button class="level-screen__options__3 level-screen__options__time">3:00</button>
             </div>
-            <i class="fas fa-torii-gate level-screen__naruto"></i>
-            <button class="level-screen__start-btn">Get Your Fingers Ready</button>
+            <!-- <i class="fas fa-torii-gate level-screen__naruto"></i> -->
+            <img src="assets/image 3.png" alt="naruto" class="level-screen__naruto" />
+            <button class="level-screen__start-btn">Prepare Your Fingers</button>
         </section>
         <section class="game-screen">
             <p class="game-screen__time">47</p>
-            <p class="game-screen__operation">9 + 10 = </p>
-            <input class="game-screen__input">
+            <p class="game-screen__equation__operation">9 + 10 = </p>
+            <input class="game-screen__equation__input">
             <div class="game-screen__lives">
                 <span class="game-screen__lives__live"></span>
                 <span class="game-screen__lives__live"></span>
@@ -38,6 +39,8 @@
             </div>
             <h2 class="game-screen__scoretitle">Score:</h2>
             <span class="game-screen__score">0</span>
+            <!-- <span class="game-screen__prevscore">0</span> -->
+            <p class="game-screen__challenge">Can you beat my high score?</p>
             <div class="game-screen__progress">
                 <div class="game-screen__progress__boxes">
                   <div class="game-screen__progress__boxes__box"></div>
@@ -56,8 +59,8 @@
         </section>
         <div class="overlay">
             <div class="overlay__inner">
-              <p class="overlay__inner_text">Congrats</p>
-              <button class="overlay__iner__resetbtn">Start Over</button>
+              <p class="overlay__inner__text">Congratulations!</p>
+              <button class="overlay__inner__resetbtn">Start Over</button>
             </div>
           </div>
     </main>

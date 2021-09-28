@@ -1,6 +1,6 @@
 const time = document.querySelector(".game-screen__time");
-const operation = document.querySelector(".game-screen__operation");
-const solutionInput = document.querySelector(".game-screen__input");
+const operation = document.querySelector(".game-screen__equation__operation");
+const solutionInput = document.querySelector(".game-screen__equation__input");
 const score = document.querySelector(".game-screen__score");
 const lives = document.querySelectorAll(".game-screen__lives__live");
 const overlay = document.querySelector(".overlay");
@@ -10,10 +10,12 @@ const levelsBtn = document.querySelectorAll(".level-screen__options__level");
 const timesBtn = document.querySelectorAll(".level-screen__options__time");
 const startBtn = document.querySelector(".level-screen__start-btn");
 const progressBar = document.querySelector(".game-screen__progress__inner");
-const resetBtn = document.querySelector(".overlay__iner__resetbtn");
+const overlayText = document.querySelector(".overlay__inner__text");
+const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 
 let currentLevel;
 let currentTime;
+let isActive = false;
 
 levelsBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -27,10 +29,11 @@ timesBtn.forEach((btn) => {
     })
 })
 
+
 startBtn.addEventListener("click", () => {
     levelScreen.style.display = "none";
     gameScreen.style.display = "grid";
-    const dojo = new Game(time, operation, solutionInput, score, lives, currentLevel, currentTime);
+    const dojo = new Game(time, operation, solutionInput, score, lives, currentLevel, currentTime, overlayText, timesBtn);
     dojo.startGame();
 })
 
@@ -42,10 +45,11 @@ resetBtn.addEventListener("click", () => {
     lives.forEach((live) => {
         live.innerText = ""
     });
-    progressBar.style.transform = `scaleX(0)`
+    progressBar.style.transform = `scaleX(0)`;
+    score.innerText = "0"
 })
 class Game {
-    constructor(time, operation, solutionInput, score, lives, currentLevel, currentTime) {
+    constructor(time, operation, solutionInput, score, lives, currentLevel, currentTime, overlayText) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
@@ -53,6 +57,7 @@ class Game {
         this.lives = lives;
         this.currentLevel = currentLevel;
         this.currentTime = currentTime;
+        this.overlayText = overlayText;
         this.currentOperator;
         this.firstNum;
         this.secondNum;
@@ -68,9 +73,8 @@ class Game {
         const countdown = setInterval(() => {
             const secondsLeft = Math.round((future - Date.now()) / 1000);
             if(secondsLeft < 0 || this.livesTracker == 3) {
+                this.displayOverlay();
                 clearInterval(countdown);
-                overlay.classList.add("isvisible");
-                gameScreen.classList.add("blur");
                 return;
             }
             this.displayTime(secondsLeft)
@@ -96,7 +100,7 @@ class Game {
         }
     }
     generateOperator () {
-        const operatorArray= ["+", "-", "*"]
+        const operatorArray= ["+", "-", "x"]
         if(this.currentLevel == "Donkey") {
             return operatorArray[Math.floor(Math.random() * 2)];
         } else if (this.currentLevel == "Einstein") {
@@ -104,14 +108,14 @@ class Game {
                 return operatorArray[Math.floor(Math.random() * 2)];
             }
             else {
-                return "*";
+                return "x";
             }
         } else {
             if (this.firstNum > 100 && this.secondNum > 100) {
                 return operatorArray[Math.floor(Math.random() * 2)];
             }
             else {
-                return "*";
+                return "x";
             }
         }
     }
@@ -131,6 +135,9 @@ class Game {
         progressBar.style.transform = `scaleX(${this.scoreTracker / 10})`
     }
     checkInput () {
+        console.log(this.firstNum);
+        console.log(this.secondNum);
+
         let expected;
         if (this.currentOperator == "+") {
             expected = this.firstNum + this.secondNum
@@ -140,6 +147,11 @@ class Game {
             expected = this.firstNum * this.secondNum
         }
         if (this.solutionInput.value != expected) {
+            this.operation.classList.add("animate-wrong")
+            setTimeout(() => this.operation.classList.remove("animate-wrong"), 457);
+            if(this.solutionInput.value == "") {
+                return;
+            }
             this.lives[this.livesTracker].innerText = "X";
             this.livesTracker += 1;
         } else {
@@ -150,16 +162,20 @@ class Game {
         }
         this.solutionInput.value = null;
     }
+    displayOverlay () {
+        this.overlayText.innerText = `Congratulations, Your score was: ${this.scoreTracker}`;
+        overlay.classList.add("isvisible");
+        gameScreen.classList.add("blur");
+
+    }
     startGame() {
-        console.log(this.currentTime);
-        console.log(this.currentLevel);
         this.generateOperation();
         this.timer();
-        solutionInput.addEventListener("keydown", (e) => {
+        solutionInput.addEventListener("keyup", (e) => {
             if (e.code == "Enter") {
                 this.checkInput();
             }
         })
-
     }
 }
+
