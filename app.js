@@ -71,7 +71,8 @@ class Game {
             } else {
                 this.startGame();
                 this.isGameActive = true;
-            } 
+            }
+            this.displayTime(parseInt(this.currentTime) * 60);
         });
         resetBtn.addEventListener("click", () => {
             this.resetGame();
