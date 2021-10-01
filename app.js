@@ -14,7 +14,9 @@ const overlayText = document.querySelector(".overlay__inner__text");
 const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 const timerstart = document.querySelector(".game-screen__timestart");
 const prevScore = document.querySelector(".game-screen__prev-score");
+const boxesContainer = document.querySelector(".game-screen__progress__boxes");
 
+let myScores = [51, 93, 143];
 class Game {
     constructor(time, operation, solutionInput, currentScore, prevScore, overlayText) {
         this.time = time;
@@ -52,6 +54,7 @@ class Game {
             gameScreen.style.display = "grid";
             if(this.isGameActive) {
                 this.generateOperation();
+                this.makeProgressBar();
             } else {
                 this.startGame();
                 this.isGameActive = true;
@@ -67,6 +70,22 @@ class Game {
         resetBtn.addEventListener("click", () => {
             this.resetGame();
         })
+    }
+    makeProgressBar () {
+        let numberOfBoxes = 0
+        console.log(this.currentLevel);
+        if(this.currentLevel == "Donkey") {
+            numberOfBoxes = myScores[0]
+        } else if (this.currentLevel = "Einstein") {
+            numberOfBoxes = myScores[1]
+        } else {
+            numberOfBoxes = myScores[2]
+        }
+        for(let i = 0; i < numberOfBoxes; i++){
+            const box = document.createElement("div");
+            box.classList.add("game-screen__progress__boxes__box");
+            boxesContainer.appendChild(box);
+        }
     }
 
     styleLevelsBtn() {
@@ -224,6 +243,7 @@ class Game {
         this.currentOperator;
     }
     startGame() {
+        this.makeProgressBar();
         this.generateOperation();
         solutionInput.addEventListener("keyup", (e) => {
             if(!this.isTimerActive) {
