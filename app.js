@@ -1,7 +1,7 @@
 const time = document.querySelector(".game-screen__time");
 const operation = document.querySelector(".game-screen__equation__operation");
 const solutionInput = document.querySelector(".game-screen__equation__input");
-const score = document.querySelector(".game-screen__score");
+const currentScore = document.querySelector(".game-screen__current-score");
 const lives = document.querySelectorAll(".game-screen__lives__live");
 const overlay = document.querySelector(".overlay");
 const levelScreen = document.querySelector(".level-screen");
@@ -13,13 +13,15 @@ const progressBar = document.querySelector(".game-screen__progress__inner");
 const overlayText = document.querySelector(".overlay__inner__text");
 const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 const timerstart = document.querySelector(".game-screen__timestart");
+const prevScore = document.querySelector(".game-screen__prev-score");
 
 class Game {
-    constructor(time, operation, solutionInput, score, overlayText) {
+    constructor(time, operation, solutionInput, currentScore, prevScore, overlayText) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
-        this.score = score;
+        this.currentScore = currentScore;
+        this.prevScore = prevScore;
         this.lives = lives;
         this.overlayText = overlayText;
         this.currentOperator;
@@ -55,6 +57,12 @@ class Game {
                 this.isGameActive = true;
             }
             this.displayTime(parseInt(this.currentTime) * 60);
+            if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
+                this.prevScore.innerText = sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`);
+            } else {
+                this.prevScore.innerText = "0"
+            }
+
         });
         resetBtn.addEventListener("click", () => {
             this.resetGame();
@@ -150,7 +158,7 @@ class Game {
         this.operation.innerText = `${this.firstNum} ${this.currentOperator} ${this.secondNum} =`;
     }
     increaseScore () {
-        this.score.innerText = this.scoreTracker
+        this.currentScore.innerText = this.scoreTracker
     }
     increaseProgressBar () {
         if(this.scoreTracker > 10) {
@@ -200,9 +208,16 @@ class Game {
         lives.forEach((live) => {
             live.innerText = ""
         });
-        sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
+        if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`) && parseInt(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) < this.scoreTracker ) {
+            console.log("exist");
+            sessionStorage.removeItem(`${this.currentLevel}${this.currentTime}`);
+            sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
+        } else if (!sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
+            console.log("no-exist");
+            sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
+        }
         progressBar.style.transform = `scaleX(0)`;
-        this.score.innerText = "0";
+        this.currentScore.innerText = "0";
         this.scoreTracker = 0;
         this.firstNum;
         this.secondNum;
@@ -222,5 +237,5 @@ class Game {
     }
 }
 
-const dojo = new Game(time, operation, solutionInput, score, overlayText);
+const dojo = new Game(time, operation, solutionInput, currentScore, prevScore, overlayText);
 dojo.getinputs();
