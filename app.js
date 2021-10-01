@@ -53,14 +53,14 @@ class Game {
     getinputs () {
         levelsBtn.forEach((btn) => {
             btn.addEventListener("click", () => {
-                this.currentLevel = btn.innerText;
-                console.log(this.currentLevel);
+                this.currentLevel = btn.innerText;     
+                this.styleLevelsBtn();
             })
         });
         timesBtn.forEach((btn) => {
             btn.addEventListener("click", () => {
                 this.currentTime = btn.innerText;
-                console.log(this.currentTime);
+                this.styleTimesBtn();
             })
         });
         startBtn.addEventListener("click", () => {
@@ -78,6 +78,29 @@ class Game {
             this.resetGame();
         })
     }
+
+    styleLevelsBtn() {
+        levelsBtn.forEach((btn) => {
+            if (btn.innerText == this.currentLevel) {
+                btn.classList.add("level-screen__options__btn__clicked");
+                console.log(btn.classList);
+            } else {
+                btn.classList.remove("level-screen__options__btn__clicked");
+            }
+        });
+    }
+
+    styleTimesBtn () {
+        timesBtn.forEach((btn) => {
+            if (btn.innerText == this.currentTime) {
+                btn.classList.add("level-screen__options__btn__clicked");
+                console.log(btn.classList);
+            } else {
+                btn.classList.remove("level-screen__options__btn__clicked");
+            }
+        });
+    }
+
     timer () {
         const now = Date.now();
         const future = now + 1000 * parseInt(this.currentTime) * 60;

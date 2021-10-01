@@ -17,7 +17,7 @@
         justify-items: center;
         p {
             font-family: 'Calligraffitti', cursive;
-            font-size: 30px;
+            font-size: 45px;
             font-weight: 1000;
         }
         &__timestext {
@@ -32,7 +32,7 @@
             grid-column: 1 / 2;
             grid-row: 4 / 5;
         }
-        button {
+        &__btn {
             width: 140px;
             padding: 12px;
             background-color: #fe6b50;
@@ -46,13 +46,16 @@
                 background-color: #A51901;
                 cursor: pointer;
             }
+            &__clicked {
+                background-color: #A51901 !important;
+            }
         } 
     }
-    &__naruto {
-        height: 185px;
+    &__temple {
+        height: 215px;
     }
     &__start-btn {
-        padding: 10px 20px;
+        padding: 12px 20px;
         background-color:#07c8cd;
         color: #0b0b0b;
         font-size: 20px;

@@ -19,7 +19,7 @@
 }
 .level-screen__options p {
   font-family: "Calligraffitti", cursive;
-  font-size: 30px;
+  font-size: 45px;
   font-weight: 1000;
 }
 .level-screen__options__timestext {
@@ -34,7 +34,7 @@
   grid-column: 1/2;
   grid-row: 4/5;
 }
-.level-screen__options button {
+.level-screen__options__btn {
   width: 140px;
   padding: 12px;
   background-color: #fe6b50;
@@ -45,15 +45,18 @@
   transition: 0.3s ease-in-out;
   text-align: center;
 }
-.level-screen__options button:hover {
+.level-screen__options__btn:hover {
   background-color: #A51901;
   cursor: pointer;
 }
-.level-screen__naruto {
-  height: 185px;
+.level-screen__options__btn__clicked {
+  background-color: #A51901 !important;
+}
+.level-screen__temple {
+  height: 215px;
 }
 .level-screen__start-btn {
-  padding: 10px 20px;
+  padding: 12px 20px;
   background-color: #07c8cd;
   color: #0b0b0b;
   font-size: 20px;
@@ -213,7 +216,7 @@ main {
 }
 main .level-screen {
   display: grid;
-  width: 90%;
+  width: 95%;
   margin: auto;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto auto auto;
