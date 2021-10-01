@@ -12,72 +12,90 @@ const startBtn = document.querySelector(".level-screen__start-btn");
 const progressBar = document.querySelector(".game-screen__progress__inner");
 const overlayText = document.querySelector(".overlay__inner__text");
 const resetBtn = document.querySelector(".overlay__inner__resetbtn");
-
-let currentLevel;
-let currentTime;
-let isActive = false;
-
-levelsBtn.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        currentLevel = btn.innerText;
-    })
-})
-
-timesBtn.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        currentTime = btn.innerText;
-    })
-})
+const timerstart = document.querySelector(".game-screen__timestart");
 
 
-startBtn.addEventListener("click", () => {
-    levelScreen.style.display = "none";
-    gameScreen.style.display = "grid";
-    const dojo = new Game(time, operation, solutionInput, score, lives, currentLevel, currentTime, overlayText, timesBtn);
-    dojo.startGame();
-})
+// resetBtn.addEventListener("click", () => {
+//     // levelScreen.style.display = "grid";
+//     // gameScreen.style.display = "none";
+//     // overlay.classList.remove("isvisible");
+//     // gameScreen.classList.remove("blur");
+//     // lives.forEach((live) => {
+//     //     live.innerText = ""
+//     // });
+//     // progressBar.style.transform = `scaleX(0)`;
+//     // score.innerText = "0"
+//     location.reload();
+//     return false;
+// })
 
-resetBtn.addEventListener("click", () => {
-    levelScreen.style.display = "grid";
-    gameScreen.style.display = "none";
-    overlay.classList.remove("isvisible");
-    gameScreen.classList.remove("blur");
-    lives.forEach((live) => {
-        live.innerText = ""
-    });
-    progressBar.style.transform = `scaleX(0)`;
-    score.innerText = "0"
-})
+// timerstart.addEventListener("click", () => {
+//     dojo.timer();
+// })
 class Game {
-    constructor(time, operation, solutionInput, score, lives, currentLevel, currentTime, overlayText) {
+    constructor(time, operation, solutionInput, score, overlayText) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
         this.score = score;
         this.lives = lives;
-        this.currentLevel = currentLevel;
-        this.currentTime = currentTime;
         this.overlayText = overlayText;
         this.currentOperator;
         this.firstNum;
         this.secondNum;
         this.scoreTracker = 0;
-        this.livesTracker = 0
-        
+        this.livesTracker = 0;
+        this.currentLevel = "";
+        this.currentTime = "";
+        this.isTimerActive = false;
+        this.isGameActive = false;
+    }
+    getinputs () {
+        levelsBtn.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                this.currentLevel = btn.innerText;
+                console.log(this.currentLevel);
+            })
+        });
+        timesBtn.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                this.currentTime = btn.innerText;
+                console.log(this.currentTime);
+            })
+        });
+        startBtn.addEventListener("click", () => {
+            levelScreen.style.display = "none";
+            gameScreen.style.display = "grid";
+            if(this.isGameActive) {
+                this.generateOperation();
+            } else {
+                this.startGame();
+                this.isGameActive = true;
+            } 
+        });
+        resetBtn.addEventListener("click", () => {
+            this.resetGame();
+        })
     }
     timer () {
         const now = Date.now();
-        const future = now + 1000 * parseInt(currentTime) * 60;
+        const future = now + 1000 * parseInt(this.currentTime) * 60;
         this.displayTime((future - now) / 1000);
 
         const countdown = setInterval(() => {
             const secondsLeft = Math.round((future - Date.now()) / 1000);
+            console.log(secondsLeft);
             if(secondsLeft < 0 || this.livesTracker == 3) {
+                this.livesTracker = 0;
+                console.log(secondsLeft);
+                console.log(this.livesTracker);
                 this.displayOverlay();
                 clearInterval(countdown);
+                this.isTimerActive = false;
                 return;
-            }
-            this.displayTime(secondsLeft)
+            } else {
+                this.displayTime(secondsLeft);
+            }     
         }, 1000);
     };
     displayTime (seconds) {
@@ -152,7 +170,7 @@ class Game {
             if(this.solutionInput.value == "") {
                 return;
             }
-            this.lives[this.livesTracker].innerText = "X";
+            lives[this.livesTracker].innerText = "X";
             this.livesTracker += 1;
         } else {
             this.scoreTracker += 1;
@@ -163,19 +181,40 @@ class Game {
         this.solutionInput.value = null;
     }
     displayOverlay () {
-        this.overlayText.innerText = `Congratulations, Your score was: ${this.scoreTracker}`;
+        overlayText.innerText = `Congratulations, Your score was: ${this.scoreTracker}`;
         overlay.classList.add("isvisible");
         gameScreen.classList.add("blur");
 
     }
+    resetGame() {
+        levelScreen.style.display = "grid";
+        gameScreen.style.display = "none";
+        overlay.classList.remove("isvisible");
+        gameScreen.classList.remove("blur");
+        lives.forEach((live) => {
+            live.innerText = ""
+        });
+        progressBar.style.transform = `scaleX(0)`;
+        this.score.innerText = "0";
+        this.scoreTracker = 0;
+        this.firstNum;
+        this.secondNum;
+        this.currentOperator;
+    }
     startGame() {
         this.generateOperation();
-        this.timer();
         solutionInput.addEventListener("keyup", (e) => {
+            if(!this.isTimerActive) {
+                this.timer();
+                this.isTimerActive = true;
+            }
             if (e.code == "Enter") {
                 this.checkInput();
             }
+
         })
     }
 }
 
+const dojo = new Game(time, operation, solutionInput, score, overlayText);
+dojo.getinputs();
