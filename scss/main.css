@@ -6,7 +6,7 @@
 }
 .level-screen__heading {
   font-family: "Calligraffitti", cursive;
-  font-size: 65px;
+  font-size: 60px;
   font-weight: 1000;
 }
 .level-screen__options {
@@ -19,7 +19,7 @@
 }
 .level-screen__options p {
   font-family: "Calligraffitti", cursive;
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 1000;
 }
 .level-screen__options__timestext {
@@ -36,7 +36,7 @@
 }
 .level-screen__options__btn {
   width: 140px;
-  padding: 12px;
+  padding: 10px 0px;
   background-color: #fe6b50;
   font-size: 20px;
   color: #0b0b0b;
@@ -56,7 +56,7 @@
   height: 215px;
 }
 .level-screen__start-btn {
-  padding: 12px 20px;
+  padding: 10px 20px;
   background-color: #07c8cd;
   color: #0b0b0b;
   font-size: 20px;
@@ -77,41 +77,50 @@
   font-size: 60px;
   justify-self: center;
 }
-.game-screen__equation {
-  width: 100%;
-  height: 75px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-column: 1/3;
-}
-.game-screen__equation__operation {
+.game-screen__operation {
   font-weight: 700;
   font-size: 50px;
   grid-column: 1/3;
   text-align: center;
+  justify-self: center;
 }
-.game-screen__equation__input {
+.game-screen__input {
   width: 150px;
   height: 70px;
   font-size: 30px;
   grid-column: 1/3;
   justify-self: center;
-  display: flex;
-  flex-direction: row-reverse;
 }
 .game-screen__lives {
-  grid-column: 2/3;
-  justify-self: end;
+  grid-column: 1/3;
+  border: black 2px solid;
+  border-right: none;
+  width: 150px;
+  height: 50px;
+  justify-self: center;
+  display: flex;
 }
 .game-screen__lives__live {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 30px;
+  border-right: black 2px solid;
   color: #900c10;
 }
 .game-screen__scoretitle {
   grid-column: 1/3;
   font-size: 55px;
   justify-self: center;
+}
+.game-screen__current-score-text {
+  align-self: center;
+  text-align: center;
+}
+.game-screen__previous-score-text {
+  align-self: center;
+  text-align: center;
 }
 .game-screen__current-score {
   grid-column: 1/2;
@@ -235,15 +244,30 @@ main .game-screen {
   width: 95%;
   margin: auto;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 150px auto auto auto auto auto auto auto auto;
+  grid-template-rows: 100px;
   min-height: 100vh;
   justify-content: center;
   align-content: center;
-  grid-gap: 10px;
+  grid-gap: 20px;
 }
 
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+  main .game-screen {
+    row-gap: 40px;
+    column-gap: 20px;
+  }
+  main .game-screen__operation {
+    grid-column: 1/2;
+    justify-self: end;
+  }
+  main .game-screen__input {
+    grid-column: 2/3;
+    justify-self: start;
+  }
 }
