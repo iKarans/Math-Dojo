@@ -14,24 +14,6 @@ const overlayText = document.querySelector(".overlay__inner__text");
 const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 const timerstart = document.querySelector(".game-screen__timestart");
 
-
-// resetBtn.addEventListener("click", () => {
-//     // levelScreen.style.display = "grid";
-//     // gameScreen.style.display = "none";
-//     // overlay.classList.remove("isvisible");
-//     // gameScreen.classList.remove("blur");
-//     // lives.forEach((live) => {
-//     //     live.innerText = ""
-//     // });
-//     // progressBar.style.transform = `scaleX(0)`;
-//     // score.innerText = "0"
-//     location.reload();
-//     return false;
-// })
-
-// timerstart.addEventListener("click", () => {
-//     dojo.timer();
-// })
 class Game {
     constructor(time, operation, solutionInput, score, overlayText) {
         this.time = time;
@@ -218,6 +200,7 @@ class Game {
         lives.forEach((live) => {
             live.innerText = ""
         });
+        sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
         progressBar.style.transform = `scaleX(0)`;
         this.score.innerText = "0";
         this.scoreTracker = 0;
@@ -235,7 +218,6 @@ class Game {
             if (e.code == "Enter") {
                 this.checkInput();
             }
-
         })
     }
 }
