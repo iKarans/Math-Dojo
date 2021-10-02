@@ -15,6 +15,17 @@ const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 const timerstart = document.querySelector(".game-screen__timestart");
 const prevScore = document.querySelector(".game-screen__prev-score");
 const boxesContainer = document.querySelector(".game-screen__progress__boxes");
+let myScores = {
+            "Donkey1:00": 51,
+            "Donnkey2:00": 94,
+            "Donkey3:00": 142,
+            "Einstein1:00": 34,
+            "Einstein2:00": 54,
+            "Einstein3:00": 69,
+            "Me1:00": 12,
+            "Me2:00": 20,
+            "Me3:00": 29,
+}
 
 class Game {
     constructor(time, operation, solutionInput, currentScore, prevScore, overlayText) {
@@ -71,21 +82,7 @@ class Game {
         })
     }
     makeProgressBar () {
-        let myScores = [51, 93, 143];
-        let numberOfBoxes = 0
-        if(this.currentLevel == "Donkey") {
-            numberOfBoxes = myScores[0];
-            console.log(this.currentLevel);
-            console.log(numberOfBoxes);
-        } else if (this.currentLevel == "Einstein") {
-            numberOfBoxes = myScores[1];
-            console.log(this.currentLevel);
-            console.log(numberOfBoxes);
-        } else {
-            numberOfBoxes = myScores[2];
-            console.log(this.currentLevel);
-            console.log(numberOfBoxes);
-        }
+        let numberOfBoxes = myScores[`${this.currentLevel}${this.currentTime}`];
         for(let i = 0; i < numberOfBoxes; i++){
             const box = document.createElement("div");
             box.classList.add("game-screen__progress__boxes__box");
