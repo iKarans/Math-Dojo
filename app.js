@@ -52,7 +52,6 @@ class Game {
         levelsBtn.forEach((btn) => {
             btn.addEventListener("click", () => {
                 this.currentLevel = btn.innerText;
-                console.log(this.currentLevel);
                 this.styleLevelsBtn();
             })
         });
@@ -73,7 +72,6 @@ class Game {
                 this.isGameActive = true;
             }
             this.displayTime(parseInt(this.currentTime) * 60);
-            console.log(this.challengeScore.innerText);
             this.challengeScore.innerText = myScores[`${this.currentLevel}${this.currentTime}`].toString();
             if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
                 this.prevScore.innerText = sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`);
@@ -91,9 +89,6 @@ class Game {
         let divArray = [];
         for(let i = 0; i < numberOfBoxes; i++){
             divArray.push(`<div class=\"game-screen__progress__boxes__box\"></div>`)
-            // const box = document.createElement("div");
-            // box.classList.add("game-screen__progress__boxes__box");
-            // boxesContainer.appendChild(box);
         }
         boxesContainer.innerHTML = divArray.join("");
     }
@@ -102,7 +97,6 @@ class Game {
         levelsBtn.forEach((btn) => {
             if (btn.innerText == this.currentLevel) {
                 btn.classList.add("level-screen__options__btn__clicked");
-                console.log(btn.classList);
             } else {
                 btn.classList.remove("level-screen__options__btn__clicked");
             }
@@ -126,11 +120,8 @@ class Game {
 
         const countdown = setInterval(() => {
             const secondsLeft = Math.round((future - Date.now()) / 1000);
-            console.log(secondsLeft);
             if(secondsLeft < 0 || this.livesTracker == 3) {
                 this.livesTracker = 0;
-                console.log(secondsLeft);
-                console.log(this.livesTracker);
                 this.displayOverlay();
                 clearInterval(countdown);
                 this.isTimerActive = false;
@@ -195,9 +186,6 @@ class Game {
         progressBar.style.transform = `scaleX(${this.scoreTracker / myScores[`${this.currentLevel}${this.currentTime}`]})`
     }
     checkInput () {
-        console.log(this.firstNum);
-        console.log(this.secondNum);
-
         let expected;
         if (this.currentOperator == "+") {
             expected = this.firstNum + this.secondNum
@@ -237,11 +225,9 @@ class Game {
             live.innerText = ""
         });
         if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`) && parseInt(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) < this.scoreTracker ) {
-            console.log("exist");
             sessionStorage.removeItem(`${this.currentLevel}${this.currentTime}`);
             sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
         } else if (!sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
-            console.log("no-exist");
             sessionStorage.setItem(`${this.currentLevel}${this.currentTime}`, this.scoreTracker);
         }
         progressBar.style.transform = `scaleX(0)`;
