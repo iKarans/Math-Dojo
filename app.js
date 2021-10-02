@@ -17,7 +17,7 @@ const prevScore = document.querySelector(".game-screen__prev-score");
 const boxesContainer = document.querySelector(".game-screen__progress__boxes");
 let myScores = {
             "Donkey1:00": 51,
-            "Donnkey2:00": 94,
+            "Donkey2:00": 94,
             "Donkey3:00": 142,
             "Einstein1:00": 34,
             "Einstein2:00": 54,
@@ -177,14 +177,14 @@ class Game {
         this.currentOperator = this.generateOperator()
         this.operation.innerText = `${this.firstNum} ${this.currentOperator} ${this.secondNum} =`;
     }
-    increaseScore () {
+    updateScore () {
         this.currentScore.innerText = this.scoreTracker
     }
-    increaseProgressBar () {
-        if(this.scoreTracker > 10) {
+    updateProgressBar () {
+        if(this.scoreTracker > myScores[`${this.currentLevel}${this.currentTime}`]) {
             return;
         }
-        progressBar.style.transform = `scaleX(${this.scoreTracker / 10})`
+        progressBar.style.transform = `scaleX(${this.scoreTracker / myScores[`${this.currentLevel}${this.currentTime}`]})`
     }
     checkInput () {
         console.log(this.firstNum);
@@ -208,8 +208,8 @@ class Game {
             this.livesTracker += 1;
         } else {
             this.scoreTracker += 1;
-            this.increaseScore();
-            this.increaseProgressBar();
+            this.updateScore();
+            this.updateProgressBar();
             this.generateOperation();
         }
         this.solutionInput.value = null;
