@@ -16,7 +16,6 @@ const timerstart = document.querySelector(".game-screen__timestart");
 const prevScore = document.querySelector(".game-screen__prev-score");
 const boxesContainer = document.querySelector(".game-screen__progress__boxes");
 
-let myScores = [51, 93, 143];
 class Game {
     constructor(time, operation, solutionInput, currentScore, prevScore, overlayText) {
         this.time = time;
@@ -24,7 +23,6 @@ class Game {
         this.solutionInput = solutionInput;
         this.currentScore = currentScore;
         this.prevScore = prevScore;
-        this.lives = lives;
         this.overlayText = overlayText;
         this.currentOperator;
         this.firstNum;
@@ -39,7 +37,8 @@ class Game {
     getinputs () {
         levelsBtn.forEach((btn) => {
             btn.addEventListener("click", () => {
-                this.currentLevel = btn.innerText;     
+                this.currentLevel = btn.innerText;
+                console.log(this.currentLevel);
                 this.styleLevelsBtn();
             })
         });
@@ -72,14 +71,20 @@ class Game {
         })
     }
     makeProgressBar () {
+        let myScores = [51, 93, 143];
         let numberOfBoxes = 0
-        console.log(this.currentLevel);
         if(this.currentLevel == "Donkey") {
-            numberOfBoxes = myScores[0]
-        } else if (this.currentLevel = "Einstein") {
-            numberOfBoxes = myScores[1]
+            numberOfBoxes = myScores[0];
+            console.log(this.currentLevel);
+            console.log(numberOfBoxes);
+        } else if (this.currentLevel == "Einstein") {
+            numberOfBoxes = myScores[1];
+            console.log(this.currentLevel);
+            console.log(numberOfBoxes);
         } else {
-            numberOfBoxes = myScores[2]
+            numberOfBoxes = myScores[2];
+            console.log(this.currentLevel);
+            console.log(numberOfBoxes);
         }
         for(let i = 0; i < numberOfBoxes; i++){
             const box = document.createElement("div");
@@ -103,7 +108,6 @@ class Game {
         timesBtn.forEach((btn) => {
             if (btn.innerText == this.currentTime) {
                 btn.classList.add("level-screen__options__btn__clicked");
-                console.log(btn.classList);
             } else {
                 btn.classList.remove("level-screen__options__btn__clicked");
             }
