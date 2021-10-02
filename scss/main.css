@@ -138,6 +138,11 @@
   font-size: 20px;
   font-weight: 400;
 }
+.game-screen__challenge-score {
+  grid-column: 1/3;
+  font-size: 55px;
+  justify-self: center;
+}
 .game-screen__progress {
   border: 2px solid black;
   border-right: none;

@@ -15,6 +15,8 @@ const resetBtn = document.querySelector(".overlay__inner__resetbtn");
 const timerstart = document.querySelector(".game-screen__timestart");
 const prevScore = document.querySelector(".game-screen__prev-score");
 const boxesContainer = document.querySelector(".game-screen__progress__boxes");
+const challengeScore = document.querySelector(".game-screen__challenge-score");
+
 let myScores = {
             "Donkey1:00": 51,
             "Donkey2:00": 94,
@@ -28,7 +30,7 @@ let myScores = {
 }
 
 class Game {
-    constructor(time, operation, solutionInput, currentScore, prevScore, overlayText) {
+    constructor(time, operation, solutionInput, currentScore, prevScore, overlayText, challengeScore) {
         this.time = time;
         this.operation = operation;
         this.solutionInput = solutionInput;
@@ -44,6 +46,7 @@ class Game {
         this.currentTime = "";
         this.isTimerActive = false;
         this.isGameActive = false;
+        this.challengeScore = challengeScore;
     }
     getinputs () {
         levelsBtn.forEach((btn) => {
@@ -70,6 +73,8 @@ class Game {
                 this.isGameActive = true;
             }
             this.displayTime(parseInt(this.currentTime) * 60);
+            console.log(this.challengeScore.innerText);
+            this.challengeScore.innerText = myScores[`${this.currentLevel}${this.currentTime}`].toString();
             if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
                 this.prevScore.innerText = sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`);
             } else {
@@ -83,11 +88,14 @@ class Game {
     }
     makeProgressBar () {
         let numberOfBoxes = myScores[`${this.currentLevel}${this.currentTime}`];
+        let divArray = [];
         for(let i = 0; i < numberOfBoxes; i++){
-            const box = document.createElement("div");
-            box.classList.add("game-screen__progress__boxes__box");
-            boxesContainer.appendChild(box);
+            divArray.push(`<div class=\"game-screen__progress__boxes__box\"></div>`)
+            // const box = document.createElement("div");
+            // box.classList.add("game-screen__progress__boxes__box");
+            // boxesContainer.appendChild(box);
         }
+        boxesContainer.innerHTML = divArray.join("");
     }
 
     styleLevelsBtn() {
@@ -258,5 +266,5 @@ class Game {
     }
 }
 
-const dojo = new Game(time, operation, solutionInput, currentScore, prevScore, overlayText);
+const dojo = new Game(time, operation, solutionInput, currentScore, prevScore, overlayText, challengeScore);
 dojo.getinputs();
