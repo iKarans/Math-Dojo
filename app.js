@@ -62,23 +62,26 @@ class Game {
             })
         });
         startBtn.addEventListener("click", () => {
-            levelScreen.style.display = "none";
-            gameScreen.style.display = "grid";
-            if(this.isGameActive) {
-                this.generateOperation();
-                this.makeProgressBar();
+            if(this.currentTime && this.currentLevel) {
+                levelScreen.style.display = "none";
+                gameScreen.style.display = "grid";
+                if(this.isGameActive) {
+                    this.generateOperation();
+                    this.makeProgressBar();
+                } else {
+                    this.startGame();
+                    this.isGameActive = true;
+                }
+                this.displayTime(parseInt(this.currentTime) * 60);
+                this.challengeScore.innerText = myScores[`${this.currentLevel}${this.currentTime}`].toString();
+                if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
+                    this.prevScore.innerText = sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`);
+                } else {
+                    this.prevScore.innerText = "0"
+                }
             } else {
-                this.startGame();
-                this.isGameActive = true;
+                return;
             }
-            this.displayTime(parseInt(this.currentTime) * 60);
-            this.challengeScore.innerText = myScores[`${this.currentLevel}${this.currentTime}`].toString();
-            if(sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`)) {
-                this.prevScore.innerText = sessionStorage.getItem(`${this.currentLevel}${this.currentTime}`);
-            } else {
-                this.prevScore.innerText = "0"
-            }
-
         });
         resetBtn.addEventListener("click", () => {
             this.resetGame();
