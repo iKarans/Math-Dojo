@@ -14,5 +14,6 @@ The game starts off on the home screen where you will be asked to select a level
 * Save the scores to a database which doesn't reset like sessionStorage.
 * Create a form to ask user to input username and use this to create a leaderboard.
 * Change the entire design using a dojo background image.
+* add transition to change of screens.
 * Add Testing
 
