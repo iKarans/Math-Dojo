@@ -47,6 +47,7 @@ class Game {
         this.isTimerActive = false;
         this.isGameActive = false;
         this.challengeScore = challengeScore;
+        this.secondsLeft;
     }
     getinputs () {
         levelsBtn.forEach((btn) => {
@@ -122,15 +123,15 @@ class Game {
         this.displayTime((future - now) / 1000);
 
         const countdown = setInterval(() => {
-            const secondsLeft = Math.round((future - Date.now()) / 1000);
-            if(secondsLeft < 0 || this.livesTracker == 3) {
+            this.secondsLeft = Math.round((future - Date.now()) / 1000);
+            if(this.secondsLeft < 0 || this.livesTracker == 3) {
                 this.livesTracker = 0;
                 this.displayOverlay();
                 clearInterval(countdown);
                 this.isTimerActive = false;
                 return;
             } else {
-                this.displayTime(secondsLeft);
+                this.displayTime(this.secondsLeft);
             }     
         }, 1000);
     };
