@@ -47,9 +47,11 @@ class Game {
         this.isTimerActive = false;
         this.isGameActive = false;
         this.challengeScore = challengeScore;
-        this.secondsLeft;
+        this.secondsLeft = 0;
+        this.easterEgg = false;
     }
     getinputs () {
+        console.log(this.secondsLeft);
         levelsBtn.forEach((btn) => {
             btn.addEventListener("click", () => {
                 this.currentLevel = btn.innerText;
@@ -175,9 +177,18 @@ class Game {
         }
     }
     generateOperation () {
-        this.firstNum = this.generateNumber();
-        this.secondNum = this.generateNumber();
-        this.currentOperator = this.generateOperator()
+        // 😉 
+        if(this.secondsLeft < 10 && !this.easterEgg && this.secondsLeft) {
+            this.firstNum = 5;
+            this.secondNum = 1601627;
+            this.currentOperator = "x"
+            this.easterEgg = true;
+
+        } else {
+            this.firstNum = this.generateNumber();
+            this.secondNum = this.generateNumber();
+            this.currentOperator = this.generateOperator();
+        } 
         this.operation.innerText = `${this.firstNum} ${this.currentOperator} ${this.secondNum} =`;
     }
     updateScore () {
@@ -237,6 +248,9 @@ class Game {
         progressBar.style.transform = `scaleX(0)`;
         this.currentScore.innerText = "0";
         this.scoreTracker = 0;
+        this.secondsLeft = 0;
+        this.easterEgg = false;
+        this.solutionInput.value = null;
         this.firstNum;
         this.secondNum;
         this.currentOperator;
