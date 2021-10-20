@@ -25,8 +25,8 @@ let myScores = {
             "Einstein2:00": 54,
             "Einstein3:00": 69,
             "Me1:00": 12,
-            "Me2:00": 20,
-            "Me3:00": 29,
+            "Me2:00": 18,
+            "Me3:00": 27,
 }
 
 class Game {
