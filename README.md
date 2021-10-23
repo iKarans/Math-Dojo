@@ -19,4 +19,4 @@ https://ikarans.github.io/Math-Dojo/
 * Change the entire design using a dojo background image.
 * add transition to change of screens.
 * Add Testing
-
+* Break class into sub classes
