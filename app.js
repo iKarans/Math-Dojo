@@ -218,7 +218,12 @@ class Game {
             lives[this.livesTracker].innerText = "X";
             this.livesTracker += 1;
         } else {
-            this.scoreTracker += 1;
+            // 😉
+            if(this.firstNum == 5 && this.secondNum == 1601627) {
+                this.scoreTracker += 100;
+            } else {
+                this.scoreTracker += 1;
+            }
             this.updateScore();
             this.updateProgressBar();
             this.generateOperation();
@@ -249,7 +254,6 @@ class Game {
         this.currentScore.innerText = "0";
         this.scoreTracker = 0;
         this.secondsLeft = 0;
-        this.easterEgg = false;
         this.solutionInput.value = null;
         this.firstNum;
         this.secondNum;
