@@ -1,5 +1,7 @@
 # Math Dojo
 
+![Math Dojo Project Image](https://github.com/iKarans/iCalculator/blob/main/Math-Dojo.png)
+
 ## Introduction
 
 A timed maths game desgined using HTML, SCSS, CSS and Javascript, implemented with a class using a mobile-first approach.
