@@ -1,6 +1,6 @@
 # Math Dojo
 
-![Math Dojo Project Image](https://github.com/iKarans/iCalculator/blob/main/Math-Dojo.png)
+![Math Dojo Project Image](https://github.com/iKarans/Math-Dojo/blob/main/Math-Dojo.png)
 
 ## Introduction
 
